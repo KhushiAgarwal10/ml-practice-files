@@ -1,0 +1,124 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Student Performance Predictor</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f6f9;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            width: 40%;
+            margin: 50px auto;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
+        }
+        h2 {
+            text-align: center;
+        }
+        label {
+            font-weight: bold;
+        }
+        input, select {
+            width: 100%;
+            padding: 8px;
+            margin: 8px 0 15px 0;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            background: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #45a049;
+        }
+        .result {
+            margin-top: 20px;
+            text-align: center;
+            font-size: 18px;
+            color: blue;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Student Math Score Predictor</h2>
+
+    <form action="/predictdata" method="POST">
+
+        <label>Gender</label>
+        <select name="gender" required>
+            <option value="">Select</option>
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+        </select>
+
+        <label>race/ethnicity</label>
+        <select name="race_ethnicity" required>
+            <option value="">Select</option>
+            <option value="group A">Group A</option>
+            <option value="group B">Group B</option>
+            <option value="group C">Group C</option>
+            <option value="group D">Group D</option>
+            <option value="group E">Group E</option>
+        </select>
+
+        <label>parental level of education</label>
+        <select name="parental_level_of_education" required>
+            <option value="">Select</option>
+            <option value="some high school">Some High School</option>
+            <option value="high school">High School</option>
+            <option value="some college">Some College</option>
+            <option value="associate's degree">Associate's Degree</option>
+            <option value="bachelor's degree">Bachelor's Degree</option>
+            <option value="master's degree">Master's Degree</option>
+        </select>
+
+        <label>lunch</label>
+        <select name="lunch" required>
+            <option value="">Select</option>
+            <option value="standard">Standard</option>
+            <option value="free/reduced">Free/Reduced</option>
+        </select>
+
+        <label>test preparation course</label>
+        <select name="test_preparation_course" required>
+            <option value="">Select</option>
+            <option value="none">None</option>
+            <option value="completed">Completed</option>
+        </select>
+
+        <label>reading Score</label>
+        <input type="number" name="reading_score" min="0" max="100" required>
+
+        <label>writing Score</label>
+        <input type="number" name="writing_score" min="0" max="100" required>
+
+        <button type="submit">Predict Math Score</button>
+    </form>
+
+    {% if results %}
+        <div class="result">
+            <h3>Predicted Math Score: {{ results }}</h3>
+        </div>
+    {% endif %}
+
+</div>
+
+</body>
+</html>
+```
