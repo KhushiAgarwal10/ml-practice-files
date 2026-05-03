@@ -36,7 +36,42 @@ class ModelTrainer:
         "xg": XGBRegressor(),
         "ab": AdaBoostRegressor()
       }
-      model_report=evaluate_model(x_train=x_train,y_train=y_train,x_test=x_test,y_test=y_test,models=models)
+
+      params={
+        "lR": {
+          "fit_intercept": [True, False],
+          "positive": [True, False]
+        },
+        "DT": {
+          "criterion": ["squared_error", "friedman_mse"],
+          "splitter": ["best", "random"],
+          "max_depth": [None, 5, 10, 20],
+          "min_samples_split": [2, 5, 10],
+        },
+        "KNN": {
+          "n_neighbors": [3, 5, 7, 9],
+          "weights": ["uniform", "distance"],
+          "algorithm": ["auto", "ball_tree", "kd_tree"]
+        },
+        "rf": {
+          "n_estimators": [100, 200, 300],
+          "max_depth": [None, 10, 20],
+          "min_samples_split": [2, 5],
+          "max_features": ["sqrt", "log2"]
+        },
+        "xg": {
+          "n_estimators": [100, 200],
+          "learning_rate": [0.01, 0.1, 0.2],
+          "max_depth": [3, 5, 7],
+          "subsample": [0.7, 0.8, 1.0],
+        },
+        "ab": {
+          "n_estimators": [50, 100, 200],
+          "learning_rate": [0.01, 0.1, 1.0],
+          "loss": ["linear", "square", "exponential"]
+        }
+      }
+      model_report=evaluate_model(x_train=x_train,y_train=y_train,x_test=x_test,y_test=y_test,models=models,param=params)
 
       best_model_score=max(sorted(model_report.values()))
       best_model_name=list(model_report.keys())[list(model_report.values()).index(best_model_score)]
